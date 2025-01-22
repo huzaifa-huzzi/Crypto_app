@@ -1,4 +1,3 @@
-import 'package:crypto_app/Views/HomeScreen/HomeScreen.dart';
 import 'package:crypto_app/Views/SplashScreen/SplashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
