@@ -15,10 +15,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   List<Widget> _buildScreens() {
     return [
-      HomeScreen(),
-      HomeScreen(),
-      HomeScreen(),
-      HomeScreen(),
+      const HomeScreen(),
+      const HomeScreen(),
+      const HomeScreen(),
+      const HomeScreen(),
     ];
   }
 

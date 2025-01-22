@@ -23,9 +23,11 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           children: [
             SizedBox(height: height * 0.06,),
+            /// Image
             Image.asset('assets/images/1.blue.jpg'),
             SizedBox(height: height * 0.03,),
-            Column(
+            /// Texts
+            const Column(
               children: [
                 Text('The Future',style: TextStyle(fontSize: 50,fontWeight:FontWeight.bold ),),
                 Text('Learn more about cryptocurrency ,look to',style: TextStyle(fontSize: 20,fontWeight:FontWeight.normal,color: Colors.grey ),),
@@ -33,11 +35,12 @@ class _SplashScreenState extends State<SplashScreen> {
               ],
             ),
             SizedBox(height: height * 0.08,),
+            /// Button
             Padding(
               padding: EdgeInsets.symmetric(horizontal: width * 0.14),
               child: InkWell(
                 onTap: (){
-                  Get.to(() => DashboardScreen());
+                  Get.to(() => const DashboardScreen());
                 },
                 child: Container(
                    decoration: BoxDecoration(
@@ -46,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
                    ),
                   child: Padding(
                       padding:EdgeInsets.symmetric(horizontal: width * 0.05 ,vertical: height *0.013),
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                          Text('CREATE PORTFOLIO',style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal),),
