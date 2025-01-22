@@ -20,6 +20,8 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body:Container(
+        width: width,
+        height: height,
         child: Column(
           children: [
             SizedBox(height: height * 0.06,),
