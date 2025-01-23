@@ -1,91 +1,98 @@
-class coins_Model {
+class Coins_Model {
   String? id;
   String? symbol;
   String? name;
   String? image;
-  int? currentPrice;
-  int? marketCap;
+  double? currentPrice;
+  double? marketCap;
   int? marketCapRank;
-  int? fullyDilutedValuation;
-  int? totalVolume;
-  int? high24h;
-  int? low24h;
+  double? fullyDilutedValuation;
+  double? totalVolume;
+  double? high24h;
+  double? low24h;
   double? priceChange24h;
   double? priceChangePercentage24h;
-  int? marketCapChange24h;
+  double? marketCapChange24h;
   double? marketCapChangePercentage24h;
-  int? circulatingSupply;
-  int? totalSupply;
-  int? maxSupply;
-  int? ath;
+  double? circulatingSupply;
+  double? totalSupply;
+  double? maxSupply;
+  double? ath;
   double? athChangePercentage;
   String? athDate;
   double? atl;
   double? atlChangePercentage;
   String? atlDate;
-  Null roi;
+  dynamic roi; // Changed Null to dynamic for flexibility
   String? lastUpdated;
   SparklineIn7d? sparklineIn7d;
 
-  coins_Model(
-      {this.id,
-        this.symbol,
-        this.name,
-        this.image,
-        this.currentPrice,
-        this.marketCap,
-        this.marketCapRank,
-        this.fullyDilutedValuation,
-        this.totalVolume,
-        this.high24h,
-        this.low24h,
-        this.priceChange24h,
-        this.priceChangePercentage24h,
-        this.marketCapChange24h,
-        this.marketCapChangePercentage24h,
-        this.circulatingSupply,
-        this.totalSupply,
-        this.maxSupply,
-        this.ath,
-        this.athChangePercentage,
-        this.athDate,
-        this.atl,
-        this.atlChangePercentage,
-        this.atlDate,
-        this.roi,
-        this.lastUpdated,
-        this.sparklineIn7d});
+  Coins_Model({
+    this.id,
+    this.symbol,
+    this.name,
+    this.image,
+    this.currentPrice,
+    this.marketCap,
+    this.marketCapRank,
+    this.fullyDilutedValuation,
+    this.totalVolume,
+    this.high24h,
+    this.low24h,
+    this.priceChange24h,
+    this.priceChangePercentage24h,
+    this.marketCapChange24h,
+    this.marketCapChangePercentage24h,
+    this.circulatingSupply,
+    this.totalSupply,
+    this.maxSupply,
+    this.ath,
+    this.athChangePercentage,
+    this.athDate,
+    this.atl,
+    this.atlChangePercentage,
+    this.atlDate,
+    this.roi,
+    this.lastUpdated,
+    this.sparklineIn7d,
+  });
 
-  coins_Model.fromJson(Map<String, dynamic> json) {
+  Coins_Model.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     symbol = json['symbol'];
     name = json['name'];
     image = json['image'];
-    currentPrice = json['current_price'];
-    marketCap = json['market_cap'];
+    currentPrice = (json['current_price'] as num?)?.toDouble();
+    marketCap = (json['market_cap'] as num?)?.toDouble();
     marketCapRank = json['market_cap_rank'];
-    fullyDilutedValuation = json['fully_diluted_valuation'];
-    totalVolume = json['total_volume'];
-    high24h = json['high_24h'];
-    low24h = json['low_24h'];
-    priceChange24h = json['price_change_24h'];
-    priceChangePercentage24h = json['price_change_percentage_24h'];
-    marketCapChange24h = json['market_cap_change_24h'];
-    marketCapChangePercentage24h = json['market_cap_change_percentage_24h'];
-    circulatingSupply = json['circulating_supply'];
-    totalSupply = json['total_supply'];
-    maxSupply = json['max_supply'];
-    ath = json['ath'];
-    athChangePercentage = json['ath_change_percentage'];
+    fullyDilutedValuation = (json['fully_diluted_valuation'] as num?)?.toDouble();
+    totalVolume = (json['total_volume'] as num?)?.toDouble();
+    high24h = (json['high_24h'] as num?)?.toDouble();
+    low24h = (json['low_24h'] as num?)?.toDouble();
+    priceChange24h = (json['price_change_24h'] as num?)?.toDouble();
+    priceChangePercentage24h = (json['price_change_percentage_24h'] as num?)?.toDouble();
+    marketCapChange24h = (json['market_cap_change_24h'] as num?)?.toDouble();
+    marketCapChangePercentage24h =
+        (json['market_cap_change_percentage_24h'] as num?)?.toDouble();
+    circulatingSupply = (json['circulating_supply'] as num?)?.toDouble();
+    totalSupply = (json['total_supply'] as num?)?.toDouble();
+    maxSupply = (json['max_supply'] as num?)?.toDouble();
+    ath = (json['ath'] as num?)?.toDouble();
+    athChangePercentage = (json['ath_change_percentage'] as num?)?.toDouble();
     athDate = json['ath_date'];
-    atl = json['atl'];
-    atlChangePercentage = json['atl_change_percentage'];
+    atl = (json['atl'] as num?)?.toDouble();
+    atlChangePercentage = (json['atl_change_percentage'] as num?)?.toDouble();
     atlDate = json['atl_date'];
     roi = json['roi'];
+
+    // Parse sparkline_in_7d if valid
+    if (json['sparkline_in_7d'] != null && json['sparkline_in_7d'] is Map<String, dynamic>) {
+      sparklineIn7d = SparklineIn7d.fromJson(json['sparkline_in_7d']);
+    } else {
+      sparklineIn7d = null;
+    }
+
     lastUpdated = json['last_updated'];
-    sparklineIn7d = json['sparkline_in_7d'] != null
-        ? SparklineIn7d.fromJson(json['sparkline_in_7d'])
-        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -104,8 +111,7 @@ class coins_Model {
     data['price_change_24h'] = priceChange24h;
     data['price_change_percentage_24h'] = priceChangePercentage24h;
     data['market_cap_change_24h'] = marketCapChange24h;
-    data['market_cap_change_percentage_24h'] =
-        marketCapChangePercentage24h;
+    data['market_cap_change_percentage_24h'] = marketCapChangePercentage24h;
     data['circulating_supply'] = circulatingSupply;
     data['total_supply'] = totalSupply;
     data['max_supply'] = maxSupply;
@@ -130,7 +136,7 @@ class SparklineIn7d {
   SparklineIn7d({this.price});
 
   SparklineIn7d.fromJson(Map<String, dynamic> json) {
-    price = json['price'].cast<double>();
+    price = (json['price'] as List<dynamic>?)?.map((e) => (e as num).toDouble()).toList();
   }
 
   Map<String, dynamic> toJson() {

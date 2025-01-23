@@ -6,19 +6,17 @@ import 'package:http/http.dart' as http;
 import 'package:crypto_app/Models/Coins_Model.dart';
 
 class CryptoRepository {
+  /// Coins API
+  Future<List<Coins_Model>> fetchCoinsApi() async {
+    String url =
+        'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&sparkline=true';
+    final response = await http.get(Uri.parse(url));
 
-   /// coins Api
-   Future<coins_Model>fetchCoinsApi()async{
-     String url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&sparkline=true';
-     final response =await http.get(Uri.parse(url));
-
-      if(response.statusCode == 200){
-        final body = jsonDecode(response.body);
-        return coins_Model.fromJson(body);
-      } else {
-        throw Exception( 'Error');
-      }
-   }
-
-
+    if (response.statusCode == 200) {
+      final List<dynamic> body = jsonDecode(response.body);
+      return body.map((json) => Coins_Model.fromJson(json)).toList();
+    } else {
+      throw Exception('Error fetching coins data');
+    }
+  }
 }

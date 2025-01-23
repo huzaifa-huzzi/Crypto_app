@@ -1,4 +1,7 @@
+import 'package:crypto_app/Models/Coins_Model.dart';
 import 'package:crypto_app/Resources/Colors/Colors.dart';
+import 'package:crypto_app/Resources/Components/Items/Items.dart';
+import 'package:crypto_app/View_Model/crypto_view_Model.dart';
 import 'package:flutter/material.dart';
 
 
@@ -101,12 +104,46 @@ class _HomeScreenState extends State<HomeScreen> {
                        ],
                      ),
                    ),
-                   Expanded(child: ListView.builder(
-                       itemCount: 10,
-                       itemBuilder: (context,index){
-                          return const Text('data');
-                       },
-                   ))
+                   FutureBuilder<List<Coins_Model>>(
+                     future: CryptoViewModel().fetchCoinsApi(),
+                     builder: (BuildContext context, snapshot) {
+                       if (snapshot.connectionState == ConnectionState.waiting) {
+                         return const Center(
+                           child: CircularProgressIndicator(
+                             color: AppColors.primary,
+                           ),
+                         );
+                       } else if (snapshot.hasError) {
+                         return Center(
+                           child: Text('Error: ${snapshot.error}'),
+                         );
+                       } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+
+                         final coins = snapshot.data!.take(4).toList();
+
+                         return Expanded(
+                           child: ListView.builder(
+                             itemCount: coins.length,
+                             itemBuilder: (context, index) {
+                               final coin = coins[index];
+                               return Items(
+                                 image: coin.image,
+                                 title: coin.name.toString(),
+                                 subtitile: '0.4 ${ coin.symbol.toString()}',
+                               );
+                             },
+                           ),
+                         );
+                       } else {
+                         return const Center(
+                           child: Text('No data available'),
+                         );
+                       }
+                     },
+                   ),
+
+
+
                  ],
                ) ,
              )
