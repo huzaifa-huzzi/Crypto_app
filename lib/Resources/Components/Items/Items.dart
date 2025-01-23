@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 class Items extends StatelessWidget {
    var image;
-   final String title,subtitile;
+   final String title,subtitile,currentPrice,changeofprice,marketCap;
    final List<double> Price;
-   Items({super.key,this.image,required this.title,required this.subtitile,required this.Price});
+   Items({super.key,this.image,required this.title,required this.subtitile,required this.Price,required this.currentPrice,required this.changeofprice,required this.marketCap});
 
   @override
   Widget build(BuildContext context) {
@@ -17,41 +17,66 @@ class Items extends StatelessWidget {
       child: Container(
         child: Row(
            children: [
-          Container(
-          height:  height * 0.05,
-          child: Row(
-            children: [
-              Image.network(image),
-            ],
+          Expanded(
+            flex: 2,
+            child: Container(
+            height:  height * 0.05,
+            child: Row(
+              children: [
+                Image.network(image),
+              ],
+            ),
+                    ),
           ),
-        ),
              SizedBox(width:  width * 0.03,),
-             Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Text(title,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-
-                 Text(subtitile,style: TextStyle(fontSize: 18,fontWeight: FontWeight.normal,color: Colors.grey),)
-               ],
+             ///Texts
+             Expanded(
+               flex: 2,
+               child: Column(
+                 crossAxisAlignment: CrossAxisAlignment.start,
+                 children: [
+                   Text(title,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                   Text(subtitile,style: TextStyle(fontSize: 18,fontWeight: FontWeight.normal,color: Colors.grey),)
+                 ],
+               ),
              ),
              SizedBox(width:  width * 0.05,),
              /// Infront chart lines
-             Container(
-               height: height * 0.05,
-               width:  width * 0.2,
-               child: Sparkline(
-                   data: Price,
-                  lineWidth: 2,
-                 lineColor: Colors.red,
-                 fillMode: FillMode.below,
-                 fillGradient: LinearGradient(
-                     colors: [Colors.red,Colors.red.shade100],
-                     begin: Alignment.topCenter,
-                   end: Alignment.bottomCenter,
-                   stops: const [0.0,0.7],
+             Expanded(
+               flex: 2,
+               child: Container(
+                 height: height * 0.05,
+                 width:  width * 0.2,
+                 child: Sparkline(
+                     data: Price,
+                    lineWidth: 2,
+                   lineColor: Colors.green,
+                   fillMode: FillMode.below,
+                   fillGradient: LinearGradient(
+                       colors: [Colors.red,Colors.red.shade100],
+                       begin: Alignment.topCenter,
+                     end: Alignment.bottomCenter,
+                     stops: const [0.0,0.7],
+                   ),
                  ),
                ),
-             )
+             ),
+             /// Prices
+             SizedBox(width:  width * 0.04,),
+             Expanded(
+               flex: 2,
+               child: Column(
+                 crossAxisAlignment: CrossAxisAlignment.start,
+                 children: [
+                   Text(currentPrice,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                   Row(
+                     children: [
+                       Text(changeofprice,style: TextStyle(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.grey),),
+                     ],
+                   ),
+                 ],
+               ),
+             ),
            ],
         ),
       ),

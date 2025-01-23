@@ -131,10 +131,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                final prices = coin.sparklineIn7d?.price?.map((e) => e.toDouble()).toList() ?? [];
 
                                return Items(
-                                 image: coin.image ?? '', // Provide a fallback if image is null
+                                 image: coin.image ?? '',
                                  title: coin.name ?? 'Unknown',
                                  subtitile: '0.4 ${coin.symbol ?? ''}',
-                                 Price: prices, // Pass the List<double> here
+                                 Price: prices,
+                                 marketCap: coin.marketCapChange24h?.toStringAsFixed(2) ?? '0.00',
+                                 changeofprice: coin.marketCapChangePercentage24h.toString(),
+                                 currentPrice: coin.currentPrice?.toStringAsFixed(2) ?? '0.00',
                                );
                              },
                            ),
