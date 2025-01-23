@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
        body: Container(
                height: height,
          width: width,
-         decoration: BoxDecoration(
+         decoration: const BoxDecoration(
            color: AppColors.primary,
          ),
          child: Column(
@@ -36,10 +36,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.white.withOpacity(0.5),
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    child: Text('Main Portfolio',style: TextStyle(fontSize: 18,color: Colors.white),),
+                    child: const Text('Main Portfolio',style: TextStyle(fontSize: 18,color: Colors.white),),
                   ),
-                   Text('Top 10 coins',style: TextStyle(fontSize: 18,color: Colors.white),),
-                   Text('Experimental',style: TextStyle(fontSize: 18,color: Colors.white),)
+                   const Text('Top 10 coins',style: TextStyle(fontSize: 18,color: Colors.white),),
+                   const Text('Experimental',style: TextStyle(fontSize: 18,color: Colors.white),)
                  ],
                ),
              ),
@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                  child: Row(
                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                    children: [
-                     Text('\$ 7,466.20',style: TextStyle(fontSize: 35,color: Colors.white,fontWeight: FontWeight.bold),),
+                     const Text('\$ 7,466.20',style: TextStyle(fontSize: 35,color: Colors.white,fontWeight: FontWeight.bold),),
                      Container(
                        padding: EdgeInsets.all(width * 0.015),
                        height: height * 0.04,
@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
              ),
              Padding(
                padding:  EdgeInsets.symmetric(horizontal: width * 0.07),
-               child:Row(
+               child:const Row(
                  children: [
                    Text(
                      '+ 162% all time',
@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
              Container(
                height: height * 0.6,
                width: width,
-               decoration: BoxDecoration(
+               decoration: const BoxDecoration(
                  color: Colors.white,
                  borderRadius: BorderRadius.only(
                    topRight: Radius.circular(50),
@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                    ),
                    Padding(
                        padding: EdgeInsets.symmetric(horizontal: width * 0.07),
-                     child: Row(
+                     child: const Row(
                        mainAxisAlignment:MainAxisAlignment.spaceBetween ,
                        children: [
                          Text('Assets',style: TextStyle(fontSize: 20),),
@@ -104,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                    Expanded(child: ListView.builder(
                        itemCount: 10,
                        itemBuilder: (context,index){
-                          return Text('data');
+                          return const Text('data');
                        },
                    ))
                  ],

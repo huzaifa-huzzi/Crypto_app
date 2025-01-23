@@ -10,5 +10,4 @@ class CryptoModel {
       return response;
    }
 
-
 }

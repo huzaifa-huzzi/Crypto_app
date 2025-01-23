@@ -23,7 +23,7 @@ class coins_Model {
   double? atl;
   double? atlChangePercentage;
   String? atlDate;
-  Null? roi;
+  Null roi;
   String? lastUpdated;
   SparklineIn7d? sparklineIn7d;
 
@@ -84,41 +84,41 @@ class coins_Model {
     roi = json['roi'];
     lastUpdated = json['last_updated'];
     sparklineIn7d = json['sparkline_in_7d'] != null
-        ? new SparklineIn7d.fromJson(json['sparkline_in_7d'])
+        ? SparklineIn7d.fromJson(json['sparkline_in_7d'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['symbol'] = this.symbol;
-    data['name'] = this.name;
-    data['image'] = this.image;
-    data['current_price'] = this.currentPrice;
-    data['market_cap'] = this.marketCap;
-    data['market_cap_rank'] = this.marketCapRank;
-    data['fully_diluted_valuation'] = this.fullyDilutedValuation;
-    data['total_volume'] = this.totalVolume;
-    data['high_24h'] = this.high24h;
-    data['low_24h'] = this.low24h;
-    data['price_change_24h'] = this.priceChange24h;
-    data['price_change_percentage_24h'] = this.priceChangePercentage24h;
-    data['market_cap_change_24h'] = this.marketCapChange24h;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['symbol'] = symbol;
+    data['name'] = name;
+    data['image'] = image;
+    data['current_price'] = currentPrice;
+    data['market_cap'] = marketCap;
+    data['market_cap_rank'] = marketCapRank;
+    data['fully_diluted_valuation'] = fullyDilutedValuation;
+    data['total_volume'] = totalVolume;
+    data['high_24h'] = high24h;
+    data['low_24h'] = low24h;
+    data['price_change_24h'] = priceChange24h;
+    data['price_change_percentage_24h'] = priceChangePercentage24h;
+    data['market_cap_change_24h'] = marketCapChange24h;
     data['market_cap_change_percentage_24h'] =
-        this.marketCapChangePercentage24h;
-    data['circulating_supply'] = this.circulatingSupply;
-    data['total_supply'] = this.totalSupply;
-    data['max_supply'] = this.maxSupply;
-    data['ath'] = this.ath;
-    data['ath_change_percentage'] = this.athChangePercentage;
-    data['ath_date'] = this.athDate;
-    data['atl'] = this.atl;
-    data['atl_change_percentage'] = this.atlChangePercentage;
-    data['atl_date'] = this.atlDate;
-    data['roi'] = this.roi;
-    data['last_updated'] = this.lastUpdated;
-    if (this.sparklineIn7d != null) {
-      data['sparkline_in_7d'] = this.sparklineIn7d!.toJson();
+        marketCapChangePercentage24h;
+    data['circulating_supply'] = circulatingSupply;
+    data['total_supply'] = totalSupply;
+    data['max_supply'] = maxSupply;
+    data['ath'] = ath;
+    data['ath_change_percentage'] = athChangePercentage;
+    data['ath_date'] = athDate;
+    data['atl'] = atl;
+    data['atl_change_percentage'] = atlChangePercentage;
+    data['atl_date'] = atlDate;
+    data['roi'] = roi;
+    data['last_updated'] = lastUpdated;
+    if (sparklineIn7d != null) {
+      data['sparkline_in_7d'] = sparklineIn7d!.toJson();
     }
     return data;
   }
@@ -134,8 +134,8 @@ class SparklineIn7d {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['price'] = this.price;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['price'] = price;
     return data;
   }
 }
