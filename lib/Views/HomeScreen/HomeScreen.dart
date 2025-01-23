@@ -126,13 +126,19 @@ class _HomeScreenState extends State<HomeScreen> {
                              itemCount: coins.length,
                              itemBuilder: (context, index) {
                                final coin = coins[index];
+
+                               // Safely access the prices and convert them to List<double>
+                               final prices = coin.sparklineIn7d?.price?.map((e) => e.toDouble()).toList() ?? [];
+
                                return Items(
-                                 image: coin.image,
-                                 title: coin.name.toString(),
-                                 subtitile: '0.4 ${ coin.symbol.toString()}',
+                                 image: coin.image ?? '', // Provide a fallback if image is null
+                                 title: coin.name ?? 'Unknown',
+                                 subtitile: '0.4 ${coin.symbol ?? ''}',
+                                 Price: prices, // Pass the List<double> here
                                );
                              },
                            ),
+
                          );
                        } else {
                          return const Center(
