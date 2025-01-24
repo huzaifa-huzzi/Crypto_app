@@ -179,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                         ),
                         SizedBox(height: height * 0.03),
-                         Text(
+                         const Text(
                           'Recommended to Buy',
                           style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
                         ),

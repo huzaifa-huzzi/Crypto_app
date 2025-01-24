@@ -6,13 +6,13 @@ class Items2 extends StatelessWidget {
   final String image;
   final String title, currentPrice, changeofprice;
 
-  Items2({
-    Key? key,
+  const Items2({
+    super.key,
     required this.image,
     required this.title,
     required this.currentPrice,
     required this.changeofprice,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
