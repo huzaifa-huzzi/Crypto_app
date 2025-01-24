@@ -118,30 +118,53 @@ class _HomeScreenState extends State<HomeScreen> {
                            child: Text('Error: ${snapshot.error}'),
                          );
                        } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-
                          final coins = snapshot.data!.take(4).toList();
 
-                         return Expanded(
-                           child: ListView.builder(
-                             itemCount: coins.length,
-                             itemBuilder: (context, index) {
-                               final coin = coins[index];
+                         return Column(
+                           children: [
+                             SizedBox(
+                               height: height * 0.9,
+                               child: ListView.builder(
+                                 itemCount: coins.length,
+                                 itemBuilder: (context, index) {
+                                   final coin = coins[index];
 
-                               // Safely access the prices and convert them to List<double>
-                               final prices = coin.sparklineIn7d?.price?.map((e) => e.toDouble()).toList() ?? [];
+                                   // Safely access the prices and convert them to List<double>
+                                   final prices = coin.sparklineIn7d?.price?.map((e) => e.toDouble()).toList() ?? [];
 
-                               return Items(
-                                 image: coin.image ?? '',
-                                 title: coin.name ?? 'Unknown',
-                                 subtitile: '0.4 ${coin.symbol ?? ''}',
-                                 Price: prices,
-                                 marketCap: coin.marketCapChange24h?.toStringAsFixed(2) ?? '0.00',
-                                 changeofprice: coin.marketCapChangePercentage24h.toString(),
-                                 currentPrice: coin.currentPrice?.toStringAsFixed(2) ?? '0.00',
-                               );
-                             },
-                           ),
-
+                                   return Items(
+                                     image: coin.image ?? '',
+                                     title: coin.name ?? 'Unknown',
+                                     subtitile: '0.4 ${coin.symbol ?? ''}',
+                                     Price: prices,
+                                     marketCap: coin.marketCapChange24h?.toStringAsFixed(2) ?? '0.00',
+                                     changeofprice: coin.marketCapChangePercentage24h.toString(),
+                                     currentPrice: coin.currentPrice?.toStringAsFixed(2) ?? '0.00',
+                                   );
+                                 },
+                               ),
+                             ),
+                             SizedBox(height: height * 0.02),
+                             // Recommended to Buy section
+                             Padding(
+                               padding: EdgeInsets.symmetric(horizontal: width * 0.06),
+                               child: const Row(
+                                 children: [
+                                   Text(
+                                     'Recommended to Buy',
+                                     style: TextStyle(fontSize: 25),
+                                   ),
+                                 ],
+                               ),
+                             ),
+                             SizedBox(height: height * 0.02),
+                             // Green container
+                             Container(
+                               height: height * 0.23,
+                               width: width,
+                               color: Colors.green,
+                             ),
+                           ],
                          );
                        } else {
                          return const Center(
@@ -150,7 +173,6 @@ class _HomeScreenState extends State<HomeScreen> {
                        }
                      },
                    ),
-
 
 
                  ],
