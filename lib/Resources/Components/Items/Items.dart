@@ -19,7 +19,7 @@ class Items extends StatelessWidget {
            children: [
           Expanded(
             flex: 2,
-            child: Container(
+            child: SizedBox(
             height:  height * 0.05,
             child: Row(
               children: [
@@ -35,8 +35,8 @@ class Items extends StatelessWidget {
                child: Column(
                  crossAxisAlignment: CrossAxisAlignment.start,
                  children: [
-                   Text(title,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                   Text(subtitile,style: TextStyle(fontSize: 18,fontWeight: FontWeight.normal,color: Colors.grey),)
+                   Text(title,style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                   Text(subtitile,style: const TextStyle(fontSize: 18,fontWeight: FontWeight.normal,color: Colors.grey),)
                  ],
                ),
              ),
@@ -44,7 +44,7 @@ class Items extends StatelessWidget {
              /// Infront chart lines
              Expanded(
                flex: 2,
-               child: Container(
+               child: SizedBox(
                  height: height * 0.05,
                  width:  width * 0.2,
                  child: Sparkline(
@@ -68,10 +68,10 @@ class Items extends StatelessWidget {
                child: Column(
                  crossAxisAlignment: CrossAxisAlignment.start,
                  children: [
-                   Text(currentPrice,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                   Text(currentPrice,style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                    Row(
                      children: [
-                       Text(changeofprice,style: TextStyle(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.grey),),
+                       Text(changeofprice,style: const TextStyle(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.grey),),
                      ],
                    ),
                  ],
