@@ -1,11 +1,9 @@
-
-
-
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:crypto_app/Models/Coins_Model.dart';
 
 class CryptoRepository {
+
   /// Coins API
   Future<List<Coins_Model>> fetchCoinsApi() async {
     String url =
@@ -19,4 +17,6 @@ class CryptoRepository {
       throw Exception('Error fetching coins data');
     }
   }
+
+
 }
