@@ -1,5 +1,3 @@
-
-
 class Coins_Model {
   String? id;
   String? symbol;
