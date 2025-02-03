@@ -6,8 +6,6 @@ import 'package:crypto_app/View_Model/crypto_view_Model.dart';
 import 'package:flutter/material.dart';
 
 
-
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
