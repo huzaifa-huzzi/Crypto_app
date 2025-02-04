@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 
 
 
-
-
 class Items extends StatelessWidget {
    var image;
    final String title,subtitile,currentPrice,changeofprice,marketCap;
