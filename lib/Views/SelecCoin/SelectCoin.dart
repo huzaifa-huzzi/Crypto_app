@@ -32,19 +32,21 @@ class SelectCoin extends StatelessWidget {
                            crossAxisAlignment: CrossAxisAlignment.start,
                            children: [
                              Text(title,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                             SizedBox(height:  height * 0.01,),
                              Text(symbol,style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal,color: Colors.grey),)
                            ],
                          ),
                        ],
                      ),
                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text('\$' + currentPrice,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.grey),),
+                          Text('\$' + currentPrice,style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal,color: Colors.black),),
+                          SizedBox(height:  height * 0.01,),
                           Text(
                             marketChangePrice24H + '%',
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 16,
                               fontWeight: FontWeight.normal,
                               color: double.tryParse(marketChangePrice24H) != null && double.parse(marketChangePrice24H) >= 0
                                   ? Colors.green
@@ -57,28 +59,35 @@ class SelectCoin extends StatelessWidget {
                   ),
                 ),
                 Divider(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      children: [
-                        Text('Low',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.grey),),
-                        Text( '\$' + low24H,style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal,color: Colors.black),),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Text('High',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.grey),),
-                        Text( '\$' + high24H,style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal,color: Colors.black),),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Text('Volume',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.grey),),
-                        Text( '\$' + totalVolume,style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal,color: Colors.black),),
-                      ],
-                    ),
-                  ],
+                Padding(
+                    padding: EdgeInsets.symmetric(horizontal: width * 0.05,vertical: height * 0.02),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          Text('Low',style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal,color: Colors.grey),),
+                          SizedBox(height:  height * 0.01,),
+                          Text( '\$' + low24H,style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal,color: Colors.black),),
+                        ],
+                      ),
+
+                      Column(
+                        children: [
+                          Text('High',style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal,color: Colors.grey),),
+                          SizedBox(height:  height * 0.01,),
+                          Text( '\$' + high24H,style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal,color: Colors.black),),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Text('Volume',style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal,color: Colors.grey),),
+                          SizedBox(height:  height * 0.01,),
+                          Text( '\$' + totalVolume + 'M',style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal,color: Colors.black),),
+                        ],
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),
