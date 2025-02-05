@@ -223,11 +223,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
 
                         SizedBox(height: height * 0.03),
-                        const Text(
-                          'Additional Content',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        // Add more widgets/content here if needed
                       ],
                     ),
                   ),
