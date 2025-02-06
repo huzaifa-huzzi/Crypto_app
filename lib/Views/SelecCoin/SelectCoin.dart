@@ -1,7 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:crypto_app/Models/ChartModel.dart';
 import 'package:crypto_app/View_Model/crypto_view_Model.dart';
-import 'package:flutter/material.dart';
-import 'package:fl_chart/fl_chart.dart';
 import '../../Resources/Colors/Colors.dart';
 
 class SelectCoin extends StatefulWidget {
@@ -135,7 +135,7 @@ class _SelectCoinState extends State<SelectCoin> {
                           ),
                           SizedBox(height: height * 0.01),
                           Text(
-                            '\$${widget.totalVolume.substring(0, widget.totalVolume.length > 6 ? 6 : widget.totalVolume.length)}M',
+                            '\$${widget.totalVolume}',
                             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.normal, color: Colors.black),
                           ),
                         ],
@@ -156,29 +156,24 @@ class _SelectCoinState extends State<SelectCoin> {
                       child: Text('Error: ${snapshot.error}'),
                     );
                   } else if (snapshot.hasData) {
-                    final List<FlSpot> spots = snapshot.data!.map((data) {
-                      return FlSpot(data.timestamp.toDouble(), data.close);
-                    }).toList();
+                    final List<ChartData> chartData = snapshot.data!
+                        .map((data) => ChartData(data.timestamp.toDouble(), data.close))
+                        .toList();
 
                     return Container(
                       height: height * 0.4,
                       width: width,
-                      child: LineChart(
-                        LineChartData(
-                          gridData: FlGridData(show: true),
-                          titlesData: FlTitlesData(show: true),
-                          borderData: FlBorderData(show: true),
-                          lineBarsData: [
-                            LineChartBarData(
-                              spots: spots,
-                              isCurved: true,
-                              color:AppColors.primary,
-                              barWidth: 2,
-                              isStrokeCapRound: true,
-                              belowBarData: BarAreaData(show: false),
-                            )
-                          ],
-                        ),
+                      child: SfCartesianChart(
+                        primaryXAxis: NumericAxis(),
+                        primaryYAxis: NumericAxis(),
+                        series: <CartesianSeries>[
+                          LineSeries<ChartData, double>(
+                            dataSource: chartData,
+                            xValueMapper: (ChartData data, _) => data.timestamp,
+                            yValueMapper: (ChartData data, _) => data.close,
+                            color: AppColors.primary,
+                          ),
+                        ],
                       ),
                     );
                   } else {
@@ -194,4 +189,11 @@ class _SelectCoinState extends State<SelectCoin> {
       ),
     );
   }
+}
+
+class ChartData {
+  final double timestamp;
+  final double close;
+
+  ChartData(this.timestamp, this.close);
 }
