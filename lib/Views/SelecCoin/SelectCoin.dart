@@ -1,14 +1,14 @@
 import 'package:crypto_app/Models/ChartModel.dart';
 import 'package:crypto_app/View_Model/crypto_view_Model.dart';
 import 'package:flutter/material.dart';
-
+import 'package:fl_chart/fl_chart.dart';
 import '../../Resources/Colors/Colors.dart';
 
-class SelectCoin extends StatelessWidget {
+class SelectCoin extends StatefulWidget {
   final String image, title, symbol, currentPrice, marketChangePrice24H, low24H, high24H, totalVolume;
 
   const SelectCoin({
-    super.key,
+    Key? key,
     required this.image,
     required this.title,
     required this.symbol,
@@ -17,8 +17,13 @@ class SelectCoin extends StatelessWidget {
     required this.low24H,
     required this.high24H,
     required this.totalVolume,
-  });
+  }) : super(key: key);
 
+  @override
+  State<SelectCoin> createState() => _SelectCoinState();
+}
+
+class _SelectCoinState extends State<SelectCoin> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
@@ -40,21 +45,21 @@ class SelectCoin extends StatelessWidget {
                       children: [
                         SizedBox(
                           height: height * 0.08,
-                          child: Image.network(image),
+                          child: Image.network(widget.image),
                         ),
                         SizedBox(width: width * 0.02),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              title,
+                              widget.title,
                               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                             SizedBox(height: height * 0.01),
                             Text(
-                              symbol,
+                              widget.symbol,
                               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.normal, color: Colors.grey),
-                            )
+                            ),
                           ],
                         ),
                       ],
@@ -63,16 +68,17 @@ class SelectCoin extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          '\$$currentPrice',
+                          '\$${widget.currentPrice}',
                           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.normal, color: Colors.black),
                         ),
                         SizedBox(height: height * 0.01),
                         Text(
-                          '$marketChangePrice24H%',
+                          '${widget.marketChangePrice24H}%',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.normal,
-                            color: double.tryParse(marketChangePrice24H) != null && double.parse(marketChangePrice24H) >= 0
+                            color: double.tryParse(widget.marketChangePrice24H) != null &&
+                                double.parse(widget.marketChangePrice24H) >= 0
                                 ? Colors.green
                                 : Colors.red,
                           ),
@@ -88,7 +94,6 @@ class SelectCoin extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // Low
                     Expanded(
                       child: Column(
                         children: [
@@ -98,16 +103,13 @@ class SelectCoin extends StatelessWidget {
                           ),
                           SizedBox(height: height * 0.01),
                           Text(
-                            '\$$low24H',
+                            '\$${widget.low24H}',
                             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.normal, color: Colors.black),
                           ),
                         ],
                       ),
                     ),
-                    // Spacer for better separation
                     SizedBox(width: width * 0.05),
-
-                    // High
                     Expanded(
                       child: Column(
                         children: [
@@ -117,15 +119,13 @@ class SelectCoin extends StatelessWidget {
                           ),
                           SizedBox(height: height * 0.01),
                           Text(
-                            '\$$high24H',
+                            '\$${widget.high24H}',
                             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.normal, color: Colors.black),
                           ),
                         ],
                       ),
                     ),
                     SizedBox(width: width * 0.05),
-
-                    // Volume
                     Expanded(
                       child: Column(
                         children: [
@@ -135,7 +135,7 @@ class SelectCoin extends StatelessWidget {
                           ),
                           SizedBox(height: height * 0.01),
                           Text(
-                            '\$${totalVolume.substring(0, totalVolume.length > 6 ? 6 : totalVolume.length)}M',
+                            '\$${widget.totalVolume.substring(0, widget.totalVolume.length > 6 ? 6 : widget.totalVolume.length)}M',
                             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.normal, color: Colors.black),
                           ),
                         ],
@@ -144,8 +144,8 @@ class SelectCoin extends StatelessWidget {
                   ],
                 ),
               ),
-              FutureBuilder<ChartModel>(
-                future: CryptoViewModel().fetchChartsApi(),
+              FutureBuilder<List<ChartModel>>(
+                future: CryptoViewModel().fetchChartApi(),
                 builder: (BuildContext context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(
@@ -156,10 +156,30 @@ class SelectCoin extends StatelessWidget {
                       child: Text('Error: ${snapshot.error}'),
                     );
                   } else if (snapshot.hasData) {
-                    return   Container(
+                    final List<FlSpot> spots = snapshot.data!.map((data) {
+                      return FlSpot(data.timestamp.toDouble(), data.close);
+                    }).toList();
+
+                    return Container(
                       height: height * 0.4,
                       width: width,
-                      color: Colors.amber,
+                      child: LineChart(
+                        LineChartData(
+                          gridData: FlGridData(show: true),
+                          titlesData: FlTitlesData(show: true),
+                          borderData: FlBorderData(show: true),
+                          lineBarsData: [
+                            LineChartBarData(
+                              spots: spots,
+                              isCurved: true,
+                              color:AppColors.primary,
+                              barWidth: 2,
+                              isStrokeCapRound: true,
+                              belowBarData: BarAreaData(show: false),
+                            )
+                          ],
+                        ),
+                      ),
                     );
                   } else {
                     return const Center(
