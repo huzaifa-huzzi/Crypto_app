@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:crypto_app/Models/ChartModel.dart';
 import 'package:http/http.dart' as http;
 import 'package:crypto_app/Models/Coins_Model.dart';
 
@@ -17,6 +18,20 @@ class CryptoRepository {
       return body.map((json) => Coins_Model.fromJson(json)).toList();
     } else {
       throw Exception('Error fetching coins data');
+    }
+  }
+
+  /// Charts Api
+  Future<ChartModel>fetchChartApi()async{
+    String url = 'https://api.coingecko.com/api/v3/coins/bitcoin/ohlc?vs_currency=usd&days=1';
+
+    final response =await http.get(Uri.parse(url));
+
+    if(response.statusCode == 200){
+      final body = jsonDecode(response.body);
+      return ChartModel.fromJson(body);
+    }else{
+      throw Exception('Error');
     }
   }
 

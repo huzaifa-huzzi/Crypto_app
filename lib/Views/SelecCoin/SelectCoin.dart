@@ -140,6 +140,11 @@ class SelectCoin extends StatelessWidget {
                   ],
                 ),
               ),
+              Container(
+                height: height * 0.4,
+                width: width,
+                color: Colors.amber,
+              )
             ],
           ),
         ),
