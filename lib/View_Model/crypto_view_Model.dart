@@ -14,7 +14,7 @@ class CryptoViewModel {
   }
 
   /// Charts
-  Future<ChartModel>fetchMoviesApi()async{
+  Future<ChartModel>fetchChartsApi()async{
     final response =await _repo.fetchChartApi();
     return response;
   }

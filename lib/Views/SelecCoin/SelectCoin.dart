@@ -1,4 +1,8 @@
+import 'package:crypto_app/Models/ChartModel.dart';
+import 'package:crypto_app/View_Model/crypto_view_Model.dart';
 import 'package:flutter/material.dart';
+
+import '../../Resources/Colors/Colors.dart';
 
 class SelectCoin extends StatelessWidget {
   final String image, title, symbol, currentPrice, marketChangePrice24H, low24H, high24H, totalVolume;
@@ -140,11 +144,30 @@ class SelectCoin extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                height: height * 0.4,
-                width: width,
-                color: Colors.amber,
-              )
+              FutureBuilder<ChartModel>(
+                future: CryptoViewModel().fetchChartsApi(),
+                builder: (BuildContext context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(color: AppColors.primary),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text('Error: ${snapshot.error}'),
+                    );
+                  } else if (snapshot.hasData) {
+                    return   Container(
+                      height: height * 0.4,
+                      width: width,
+                      color: Colors.amber,
+                    );
+                  } else {
+                    return const Center(
+                      child: Text('No data available'),
+                    );
+                  }
+                },
+              ),
             ],
           ),
         ),
