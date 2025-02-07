@@ -24,6 +24,9 @@ class SelectCoin extends StatefulWidget {
 }
 
 class _SelectCoinState extends State<SelectCoin> {
+
+  List<String> text = ['D','W','M','3M','6M','Y'];
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
@@ -156,22 +159,32 @@ class _SelectCoinState extends State<SelectCoin> {
                       child: Text('Error: ${snapshot.error}'),
                     );
                   } else if (snapshot.hasData) {
-                    final List<ChartData> chartData = snapshot.data!
-                        .map((data) => ChartData(data.timestamp.toDouble(), data.close))
+                    final List<CandleData> candleData = snapshot.data!
+                        .map((data) => CandleData(
+                      data.timestamp.toDouble(),
+                      data.open,
+                      data.high,
+                      data.low,
+                      data.close,
+                    ))
                         .toList();
 
-                    return Container(
+                    return SizedBox(
                       height: height * 0.4,
                       width: width,
                       child: SfCartesianChart(
                         primaryXAxis: NumericAxis(),
                         primaryYAxis: NumericAxis(),
-                        series: <CartesianSeries>[
-                          LineSeries<ChartData, double>(
-                            dataSource: chartData,
-                            xValueMapper: (ChartData data, _) => data.timestamp,
-                            yValueMapper: (ChartData data, _) => data.close,
-                            color: AppColors.primary,
+                        series: <CandleSeries>[
+                          CandleSeries<CandleData, double>(
+                            dataSource: candleData,
+                            xValueMapper: (CandleData data, _) => data.timestamp,
+                            lowValueMapper: (CandleData data, _) => data.low,
+                            highValueMapper: (CandleData data, _) => data.high,
+                            openValueMapper: (CandleData data, _) => data.open,
+                            closeValueMapper: (CandleData data, _) => data.close,
+                            bullColor: Colors.green,
+                            bearColor: Colors.red,
                           ),
                         ],
                       ),
@@ -183,6 +196,28 @@ class _SelectCoinState extends State<SelectCoin> {
                   }
                 },
               ),
+              Container(
+                height: height * 0.03,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: text.length,
+                    itemBuilder: (context,index){
+                      return
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: width * 0.02),
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: width * 0.02,vertical: height * 0.005),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: AppColors.primary.withOpacity(0.5)
+                              ),
+                              child: Text(text[index],style: TextStyle(fontSize: 18),),
+                            ),
+                          );
+                    }
+                ),
+              )
             ],
           ),
         ),
@@ -191,9 +226,12 @@ class _SelectCoinState extends State<SelectCoin> {
   }
 }
 
-class ChartData {
+class CandleData {
   final double timestamp;
+  final double open;
+  final double high;
+  final double low;
   final double close;
 
-  ChartData(this.timestamp, this.close);
+  CandleData(this.timestamp, this.open, this.high, this.low, this.close);
 }
