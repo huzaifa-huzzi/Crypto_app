@@ -207,7 +207,7 @@ class _SelectCoinState extends State<SelectCoin> {
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: width * 0.02),
                             child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: width * 0.02,vertical: height * 0.005),
+                              padding: EdgeInsets.symmetric(horizontal: width * 0.01,vertical: height * 0.005),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),
                                   color: AppColors.primary.withOpacity(0.5)
