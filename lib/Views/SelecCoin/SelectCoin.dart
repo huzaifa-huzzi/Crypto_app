@@ -4,6 +4,8 @@ import 'package:crypto_app/Models/ChartModel.dart';
 import 'package:crypto_app/View_Model/crypto_view_Model.dart';
 import '../../Resources/Colors/Colors.dart';
 
+
+
 class SelectCoin extends StatefulWidget {
   final String image, title, symbol, currentPrice, marketChangePrice24H, low24H, high24H, totalVolume;
 
