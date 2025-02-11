@@ -21,8 +21,6 @@ class CryptoRepository {
     }
   }
 
-
-
   /// Charts Api
   Future<List<ChartModel>> fetchChartApi() async {
     String url =
