@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+
+
 class SelectCoinController extends GetxController {
   var selectedTabIndex = 2.obs;
 
