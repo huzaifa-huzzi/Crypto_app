@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 
-
-
 class Items2 extends StatelessWidget {
   final String image;
   final String title, currentPrice, changeofprice;
