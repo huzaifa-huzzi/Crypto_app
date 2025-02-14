@@ -238,6 +238,7 @@ class _SelectCoinState extends State<SelectCoin> {
     );
   }
 }
+
 class CandleData {
   final double timestamp;
   final double open;
