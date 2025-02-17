@@ -8,7 +8,7 @@ class SelectCoin extends StatefulWidget {
   final String image, title, symbol, currentPrice, marketChangePrice24H, low24H, high24H, totalVolume;
 
   const SelectCoin({
-    Key? key,
+    super.key,
     required this.image,
     required this.title,
     required this.symbol,
@@ -17,7 +17,7 @@ class SelectCoin extends StatefulWidget {
     required this.low24H,
     required this.high24H,
     required this.totalVolume,
-  }) : super(key: key);
+  });
 
   @override
   State<SelectCoin> createState() => _SelectCoinState();
@@ -143,8 +143,8 @@ class _SelectCoinState extends State<SelectCoin> {
                           height: height * 0.4,
                           width: width,
                           child: SfCartesianChart(
-                            primaryXAxis: NumericAxis(),
-                            primaryYAxis: NumericAxis(),
+                            primaryXAxis: const NumericAxis(),
+                            primaryYAxis: const NumericAxis(),
                             series: <CandleSeries>[
                               CandleSeries<CandleData, double>(
                                 dataSource: candleData,
@@ -187,7 +187,7 @@ class _SelectCoinState extends State<SelectCoin> {
                   SizedBox(height: height * 0.02),
                   Padding(
                       padding: EdgeInsets.only(right: width * .80),
-                      child: Text('News', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black))),
+                      child: const Text('News', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black))),
                   SizedBox(height: height * 0.01),
                   // Scrollable news text section, keeping the CircleAvatar in its place
                   Row(
@@ -207,7 +207,7 @@ class _SelectCoinState extends State<SelectCoin> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(right: width * 0.05),
-                        child: CircleAvatar(
+                        child: const CircleAvatar(
                           radius: 35, // Increased the size of the avatar
                           backgroundImage: AssetImage('assets/images/11.PNG'),
                         ),
@@ -230,8 +230,8 @@ class _SelectCoinState extends State<SelectCoin> {
                   children: [
                     ElevatedButton.icon(
                       onPressed: () {},
-                      icon: Icon(Icons.add, color: Colors.white),
-                      label: Text('Add to Portfolio', style: TextStyle(color: Colors.white)),
+                      icon: const Icon(Icons.add, color: Colors.white),
+                      label: const Text('Add to Portfolio', style: TextStyle(color: Colors.white)),
                       style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
                     ),
                     Container(
