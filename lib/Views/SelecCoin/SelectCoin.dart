@@ -230,6 +230,54 @@ class _SelectCoinState extends State<SelectCoin> {
                     );
                   },
                 ),
+              ),
+              Container(
+                height: height * 0.1,
+                width: width,
+                color: AppColors.primary,
+                child: Column(
+                  children: [
+                    Divider(thickness: 2,),
+                    Row(
+                      children: [
+                        SizedBox(width:  width * 0.05,),
+                        Expanded(
+                          flex: 5,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: width * 0.05,vertical: height * 0.01),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: AppColors.primary,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                               Icon(Icons.add),
+                                Text('Add to Portfolio',style: TextStyle(fontSize: 20),)
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(width:  width * 0.05,),
+              Expanded(
+                flex: 2,
+                child: Container(
+                 padding: EdgeInsets.symmetric(horizontal: width * 0.05,vertical: height * 0.01),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.grey.withOpacity(0.3)
+                  ),
+                  child: Image.asset(
+                    'assets/icons/3.1.png',
+                    height: height * 0.03,
+                    color: Colors.black,
+                  ) ,
+                ),
               )
             ],
           ),
