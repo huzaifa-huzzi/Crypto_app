@@ -5,6 +5,7 @@ import 'package:crypto_app/Resources/Components/Items/Items2.dart';
 import 'package:crypto_app/View_Model/crypto_view_Model.dart';
 import 'package:crypto_app/Views/SelecCoin/SelectCoin.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -207,21 +208,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                     final coin = coins[index];
                                     return  GestureDetector(
                                       onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => SelectCoin(
-                                              image: coin.image.toString(),
-                                              title: coin.name.toString(),
-                                              symbol: coin.id.toString(),
-                                              currentPrice: coin.currentPrice.toString(),
-                                              marketChangePrice24H: coin.marketCapChangePercentage24h.toString(),
-                                              low24H: coin.low24h.toString(),
-                                              high24H: coin.high24h.toString(),
-                                              totalVolume: coin.totalVolume.toString(),
-                                            ),
-                                          ),
-                                        );
+                                        Get.to(() => SelectCoin(
+                                          image: coin.image.toString(),
+                                          title: coin.name.toString(),
+                                          symbol: coin.id.toString(),
+                                          currentPrice: coin.currentPrice.toString(),
+                                          marketChangePrice24H: coin.marketCapChangePercentage24h.toString(),
+                                          low24H: coin.low24h.toString(),
+                                          high24H: coin.high24h.toString(),
+                                          totalVolume: coin.totalVolume.toString(),
+                                        ));
                                       },
                                       child: Items2(
                                         image: coin.image ?? '',
