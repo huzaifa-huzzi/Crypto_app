@@ -5,6 +5,7 @@ import 'package:crypto_app/Models/Coins_Model.dart';
 
 
 
+
 class CryptoRepository {
 
   /// Coins API
